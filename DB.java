@@ -13,6 +13,18 @@ public class DB {
         produtoList = new ArrayList<Produto>();
     }
 
+    public int getProdutoIndex(String nome)
+    {
+        for(int i=0; i<produtoList.size(); i++)
+        {
+            if(produtoList.get(i).nome.equalsIgnoreCase(nome))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public int getUserIndex(String cpf)
     {
         for(int i=0; i<userList.size(); i++)
@@ -120,6 +132,29 @@ public class DB {
 
         System.out.println(Nome+" cadastrado com sucesso :P");
 
+    }
+
+    public void verificarEstoque()
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("-----------------");
+        System.out.println("Digite o nome do produto: ");
+
+        String Nome = scanner.nextLine();
+
+        int i = getProdutoIndex(Nome);
+
+        if(i == -1){
+            System.out.println("Produto não listado no estoque");
+        }else {
+            Produto p1 = this.produtoList.get(i);
+            if(p1.quantidade > 0){
+                System.out.println("O produto  " +Nome+ " está disponível no estoque!");
+            }else{
+                System.out.println("O produto " +Nome+ " não está disponível no estoque :(");
+            }
+        }
     }
 
 }

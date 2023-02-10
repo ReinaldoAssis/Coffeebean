@@ -1,5 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -22,6 +20,7 @@ public class Main {
             System.out.println("3. Modificar usuario");
             System.out.println("4. Cadastrar produto");
             System.out.println("5. Remover produto");
+            System.out.println("6. Verificar produto no estoque");
             System.out.println("99. Sair");
             System.out.println("----------------");
             
@@ -51,15 +50,14 @@ public class Main {
                     System.out.println(":P");
                 break;
 
+                case "6":
+                    db.verificarEstoque();
+                break;
+
                 case "99":
                     System.exit(0);
                 break;
             }
-
         }
-
-
-
-
     }
 }
