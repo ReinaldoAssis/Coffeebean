@@ -228,10 +228,26 @@ public class DB {
         }
         else
         {
+           
             Produto p1 = this.produtoList.get(i);
-            System.out.println("Digite a quantidade que deseja adicionar: ");
-            int quantidade = scanner.nextInt();
-            adicionarAoCarrinho(userList.get(u), p1, quantidade); //chama a função no usuário solicitado
+            if (produtoList.get(i).tipo equalsIgnoreCase("livro") ) {
+                System.out.println("Você deseja alugar ou comprar?");
+                Scanner tipo = new Scanner(System.in);
+                switch (tipo) {
+                    case "alugar":
+                        user.fidelidade++;
+                        System.out.println("Digite a quantidade que deseja adicionar: ");
+                        int quantidade = scanner.nextInt();
+                        adicionarAoCarrinho(userList.get(u), p1, quantidade);//chama a função no usuário solicitado
+                        break;
+                    case "comprar":
+                        System.out.println("Digite a quantidade que deseja adicionar: ");
+                        int quantidade = scanner.nextInt();
+                        adicionarAoCarrinho(userList.get(u), p1, quantidade);//chama a função no usuário solicitado
+                        break;
+                    default:
+                        break;
+                }
         }
     }
 
