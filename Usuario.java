@@ -8,6 +8,7 @@ public class Usuario {
     public String email;
     public String numero;
     public boolean status;
+    public String fidelidade;
 
     public List<Produto> carrinho;
 
@@ -46,6 +47,7 @@ public class Usuario {
         String Numero = Leitor.nextLine();
         setNumero(Numero);
 
+        setFidelidade();
         setStatus(true);
     }
 
@@ -88,6 +90,16 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    
+    public String  getfidelidade()
+    {
+        return fidelidade;
+    }
+
+    public void setFidelidade()
+    {
+        this.fidelidade  = "0";
     }
 
     public String getEmail() {
