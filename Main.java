@@ -21,6 +21,7 @@ public class Main {
             System.out.println("4. Cadastrar produto");
             System.out.println("5. Remover produto");
             System.out.println("6. Verificar produto no estoque");
+            System.out.println("7. Adicionar ao carrinho");
             System.out.println("99. Sair");
             System.out.println("----------------");
             
@@ -47,11 +48,16 @@ public class Main {
                 break;
             
                 case "5":
+                    //TODO: função remover produto
                     System.out.println(":P");
                 break;
 
                 case "6":
                     db.verificarEstoque();
+                break;
+
+                case "7":
+                    db.promptAdicionarAoCarrinho();
                 break;
 
                 case "99":

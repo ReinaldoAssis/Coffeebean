@@ -1,16 +1,22 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Usuario {
-
-    public Usuario() {
-        this.setStatus(false);
-    }
-
     public String nome;
     public String cpf;
     public String email;
     public String numero;
     public boolean status;
+
+    public List<Produto> carrinho;
+
+    public Usuario() {
+        this.setStatus(false);
+        carrinho = new ArrayList<Produto>();
+    }
+
+
     public void estadoAtual(){
         System.out.println("-----------------");
         System.out.println("Nome: " + this.getNome());
