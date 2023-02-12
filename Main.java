@@ -22,6 +22,7 @@ public class Main {
             System.out.println("5. Remover produto");
             System.out.println("6. Verificar produto no estoque");
             System.out.println("7. Adicionar ao carrinho");
+            System.out.println(("8. Consultar os pontos de fidelidade"));
             System.out.println("99. Sair");
             System.out.println("----------------");
             
@@ -60,6 +61,10 @@ public class Main {
                     db.promptAdicionarAoCarrinho();
                 break;
 
+                case "8":
+                    db.ConsultaFidelidade();
+                 break;    
+                    
                 case "99":
                     System.exit(0);
                 break;
