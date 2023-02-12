@@ -73,6 +73,17 @@ public class DB {
         userList.get(i).estadoAtual();
         
     }
+    
+  public void ConsultaFidelidade()
+    {
+        Scanner leitor = new Scanner(System.in);
+        System.out.println("Digite o CPF do usuario que deseja fazer a consulta: ");
+        String cpf = leitor.nextLine();
+
+        int i = getUserIndex(cpf);
+        if(i == -1) System.out.println("Usuario não existe");
+        System.out.println("Pontos de fidelidade:" + this.userList.get(i).fidelidade);
+    }
 
     public void removerUsuario(String cpf)
     {
