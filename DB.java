@@ -229,7 +229,7 @@ public class DB {
                 System.out.println("Você deseja alugar ou comprar?");
                 Scanner scanner1 = new Scanner(System.in);
                 String tipo = scanner1.nextLine();
-                switch ("tipo") {
+                switch (tipo) {
                     case "alugar":
                         this.userList.get(u).fidelidade++;
                         System.out.println("Digite a quantidade que deseja adicionar: ");
