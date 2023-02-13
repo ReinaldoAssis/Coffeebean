@@ -2,14 +2,12 @@ import java.util.Scanner;
 
 public class Produto {
 
-    
     public String codigo;
     public String nome;
     public int quantidade;
     public String tipo;
     public double valorDeCompra;
     public double valorDeVenda;
-    
     
     public Produto(String _codigo, String _nome, int _quantidade, String _tipo, double _valorDeCompra, double _valorDeVenda) {
         this.codigo = _codigo;

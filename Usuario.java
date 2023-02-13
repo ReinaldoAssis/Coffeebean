@@ -8,13 +8,14 @@ public class Usuario {
     public String email;
     public String numero;
     public boolean status;
-    public String fidelidade;
+    public int fidelidade;
 
     public List<Produto> carrinho;
 
     public Usuario() {
         this.setStatus(false);
         carrinho = new ArrayList<Produto>();
+        this.setFidelidade(0);
     }
 
 
@@ -92,14 +93,14 @@ public class Usuario {
         this.cpf = cpf;
     }
     
-    public String  getfidelidade()
+    public int getfidelidade()
     {
         return fidelidade;
     }
 
     public void setFidelidade()
     {
-        this.fidelidade  = "0";
+        this.fidelidade  = 0;
     }
 
     public String getEmail() {
@@ -124,5 +125,12 @@ public class Usuario {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+    public int getFidelidade() {
+        return fidelidade;
+    }
+
+    public void setFidelidade(int fidelidade) {
+        this.fidelidade = fidelidade;
     }
 }

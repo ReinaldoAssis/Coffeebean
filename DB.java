@@ -197,20 +197,18 @@ public class DB {
 
     //@Reinaldo
     //solicita input do usuario e chama adicionarAoCarrinho
-    public void promptAdicionarAoCarrinho()
-    {
+    public void promptAdicionarAoCarrinho() {
         Scanner scanner = new Scanner(System.in);
 
         //primeiro verificamos a existencia do usuario
 
         System.out.println("-----------------");
         System.out.println("Digite o CPF do usuario: ");
-        
+
         String cpf = scanner.nextLine();
         int u = getUserIndex(cpf);
-        
-        if(u == -1)
-        {
+
+        if (u == -1) {
             System.out.println("Usuario não cadastrado");
             return;
         }
@@ -222,33 +220,33 @@ public class DB {
         System.out.println("Digite o nome do produto: ");
         String Nome = scanner.nextLine();
         int i = getProdutoIndex(Nome);
-        if(i == -1)
-        {
+        if (i == -1) {
             System.out.println("Produto não listado no estoque");
-        }
-        else
-        {
-           
+        } else {
+
             Produto p1 = this.produtoList.get(i);
-            if (produtoList.get(i).tipo equalsIgnoreCase("livro") ) {
+            if (produtoList.get(i).tipo.equalsIgnoreCase("livro")) {
                 System.out.println("Você deseja alugar ou comprar?");
-                Scanner tipo = new Scanner(System.in);
-                switch (tipo) {
+                Scanner scanner1 = new Scanner(System.in);
+                String tipo = scanner1.nextLine();
+                switch ("tipo") {
                     case "alugar":
-                        user.fidelidade++;
+                        this.userList.get(u).fidelidade++;
                         System.out.println("Digite a quantidade que deseja adicionar: ");
-                        int quantidade = scanner.nextInt();
+                        Scanner scanner2 = new Scanner(System.in);
+                        int quantidade = scanner2.nextInt();
                         adicionarAoCarrinho(userList.get(u), p1, quantidade);//chama a função no usuário solicitado
                         break;
                     case "comprar":
                         System.out.println("Digite a quantidade que deseja adicionar: ");
-                        int quantidade = scanner.nextInt();
-                        adicionarAoCarrinho(userList.get(u), p1, quantidade);//chama a função no usuário solicitado
+                        Scanner scanner3 = new Scanner(System.in);
+                        int Quantidade = scanner3.nextInt();
+                        adicionarAoCarrinho(userList.get(u), p1, Quantidade);//chama a função no usuário solicitado
                         break;
                     default:
                         break;
                 }
+            }
         }
     }
-
 }
