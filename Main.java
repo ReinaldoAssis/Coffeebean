@@ -1,13 +1,11 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        //TODO
-        // Produto P1 = new Produto();
-
-        // P1.registroProduto();
+        Utils util = new Utils();
 
 
         DB db = new DB();
@@ -32,40 +30,47 @@ public class Main {
             switch(opcao)
             {
                 case "1":
+                    Utils.clearScreen();
                     db.criarUsuario();    
                 break;
 
                 case "2":
+                    Utils.clearScreen();
                     db.removerUsuario();
-
                 break;
 
                 case "3":
+                    Utils.clearScreen();
                     db.modificarUsuario();
                 break;
 
                 case "4":
+                    Utils.clearScreen();
                     db.cadastrarProduto();
                 break;
             
                 case "5":
-                    //TODO: função remover produto
+                    Utils.clearScreen();
                     System.out.println(":P");
                 break;
 
                 case "6":
+                    Utils.clearScreen();
                     db.verificarEstoque();
                 break;
 
                 case "7":
+                    Utils.clearScreen();
                     db.promptAdicionarAoCarrinho();
                 break;
 
                 case "8":
+                    Utils.clearScreen();
                     db.ConsultaFidelidade();
                  break;    
                     
                 case "99":
+                    Utils.clearScreen();
                     System.exit(0);
                 break;
             }
