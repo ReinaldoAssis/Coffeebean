@@ -7,6 +7,30 @@ public class Main {
 
 
         DB db = new DB();
+
+        //DEFAULTS
+        Usuario rei = new Usuario();
+        rei.setNome("Rei");
+        rei.setCpf("117");
+        rei.setEmail("teste@teste.com");
+        rei.setNumero("99");
+        rei.fidelidade = 0;
+        rei.setStatus(true);
+
+        Produto livro = new Produto();
+        livro.nome = "Harry Potter";
+        livro.codigo = "1";
+        livro.tipo = "livro";
+        livro.quantidade = 10;
+        livro.valorDeCompra = 10;
+        livro.valorDeVenda = 20;
+
+        db.compra += 100;
+
+        db.userList.add(rei);
+        db.produtoList.add(livro);
+
+
         while(true)
         {
             Utils.clearScreen();
@@ -18,9 +42,11 @@ public class Main {
             System.out.println("4. Cadastrar produto");
             System.out.println("5. Remover produto");
             System.out.println("6. Verificar produto no estoque");
-            System.out.println("7. Adicionar ao carrinho");
-            System.out.println("8. Consultar os pontos de fidelidade");
-            System.out.println("99. Sair");
+            System.out.println("7. Carrinho");
+            System.out.println("8. Aluguel de livro");
+            System.out.println("9. Fluxo de caixa");
+            System.out.println("10. Consultar os pontos de fidelidade");
+            System.out.println("11. Sair");
             System.out.println("----------------");
             
             Scanner leitor = new Scanner(System.in);
@@ -60,19 +86,30 @@ public class Main {
 
                 case "7":
                     Utils.clearScreen();
-                    db.promptAdicionarAoCarrinho();
+                    db.menuCarrinho();
                 break;
 
                 case "8":
                     Utils.clearScreen();
+                    db.promptAlugarLivro();
+                 break;  
+                 
+                 case "9":
+                    Utils.clearScreen();
+                    db.fluxoDeCaixa();
+                 break;
+
+                 case "10":
+                    Utils.clearScreen();
                     db.ConsultaFidelidade();
-                 break;    
+                 break;
                     
-                case "99":
+                case "11":
                     Utils.clearScreen();
                     System.exit(0);
                 break;
             }
         }
     }
+
 }

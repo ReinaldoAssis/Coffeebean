@@ -1,11 +1,16 @@
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 
 public class DB {
     List<Usuario> userList;
     List<Produto> produtoList;
+
+    //Dictionary<Usuario, List<Produto>> vendas;
+    double venda = 0;
+    double compra = 0;
 
     public DB()
     {
@@ -118,6 +123,7 @@ public class DB {
 
     }
 
+    //@Adonys
     public void cadastrarProduto()
     {
         Scanner scanner = new Scanner(System.in);
@@ -143,6 +149,8 @@ public class DB {
         Produto pd = new Produto(Codigo, Nome, Quantidade, Tipo, valorC, valorV);
         
         produtoList.add(pd);
+
+        compra += valorC * Quantidade;
 
         System.out.println(Nome+" cadastrado com sucesso :P");
 
@@ -219,6 +227,10 @@ public class DB {
         if(produto.quantidade >= quantidade)
         {
             produto.quantidade -= quantidade;
+
+            Produto novo = produto;
+            novo.quantidade = quantidade;
+
             user.carrinho.add(produto);
             System.out.println(produto.nome+" adicionado ao carrinho");
         }
@@ -240,24 +252,148 @@ public class DB {
     }
 
     //@Reinaldo
-    //solicita input do usuario e chama adicionarAoCarrinho
-    public void promptAdicionarAoCarrinho() {
+    public void fluxoDeCaixa()
+    {
+        System.out.println("Fluxo de caixa: " + venda+" - "+compra+" = "+(venda-compra));
+        Utils.awaitInput();
+    }
+
+    //@Reinaldo
+    public void menuCarrinho()
+    {
         Scanner scanner = new Scanner(System.in);
+        Utils.clearScreen();
 
-        //primeiro verificamos a existencia do usuario
-
-        System.out.println("-----------------");
         System.out.println("Digite o CPF do usuario: ");
-
+        
         String cpf = scanner.nextLine();
         int u = getUserIndex(cpf);
-
+        
         if (u == -1) {
             System.out.println("Usuario não cadastrado");
             return;
         }
+        
+        Usuario user = userList.get(u);
+        
+        while(true)
+        {
 
-        //agora verificamos a existencia do produto
+
+            Utils.clearScreen();
+
+            System.out.println("-----------------");
+            System.out.println("Carrinho de " + user.nome);
+            System.out.println();
+            System.out.println("1. Adicionar produto");
+            System.out.println("2. Remover produto");
+            System.out.println("3. Visualizar carrinho");
+            System.out.println("4. Finalizar compra");
+            System.out.println("5. Voltar ao menu");
+            System.out.println("-----------------");
+
+            int opcao = scanner.nextInt();
+
+            switch(opcao)
+            {
+                case 1:
+                    promptAdicionarAoCarrinho(user);
+                    break;
+                case 2:
+                    promptRemoverDoCarrinho(user);
+                    break;
+                case 3:
+                    printarCarrinho(user);
+                    break;
+                case 4:
+                    finalizarCompra(user);
+                    break;
+
+                case 5:
+                    return;
+                default:
+                    System.out.println("Opção inválida");
+                    break;
+            }
+
+        }
+
+
+    }
+
+    //@Reinaldo
+    public void promptAlugarLivro()
+    {
+        Scanner scanner = new Scanner(System.in);
+        Utils.clearScreen();
+
+        System.out.println("Digite o CPF do usuario: ");
+        
+        String cpf = scanner.nextLine();
+        int u = getUserIndex(cpf);
+        
+        if (u == -1) {
+            System.out.println("Usuario não cadastrado");
+            return;
+        }
+        
+        Usuario user = userList.get(u);
+        
+        System.out.println("Digite o nome do livro: ");
+        String nome = scanner.nextLine();
+        
+        int i = getProdutoIndex(nome);
+        if(i == -1) System.out.println("O Produto não existe");
+        else {
+            Produto p = produtoList.get(i);
+            if(p.tipo.equalsIgnoreCase("livro"))
+            {
+                user.alugados.add(p);
+            }
+            System.out.println("Livro alugado por "+ user.nome+", valor: "+ p.valorDeVenda*0.3);
+            venda += p.valorDeVenda*0.3;
+        }
+
+        user.fidelidade += 1;
+        
+        Utils.awaitInput();
+    }
+
+    //@Reinaldo
+    public void finalizarCompra(Usuario user)
+    {
+        double total = 0;
+        for(int i=0; i<user.carrinho.size(); i++)
+        {
+            total += user.carrinho.get(i).valorDeVenda*user.carrinho.get(i).quantidade;
+        }
+        System.out.println("Compra finalizada, total: " + total);
+        
+        venda += total;
+
+        user.carrinho.clear();
+
+        Utils.awaitInput();
+    }
+
+    //@Reinaldo
+    public void printarCarrinho(Usuario user)
+    {
+        System.out.println("Nome | Quantidade | Codigo");
+        for(int i=0; i<user.carrinho.size(); i++)
+        {
+            System.out.println(user.carrinho.get(i).nome + " | " + user.carrinho.get(i).quantidade + " | " + user.carrinho.get(i).codigo);   
+        }
+        System.out.println("-----------------");
+
+        Utils.awaitInput();
+    }
+
+    //@Reinaldo
+    //solicita input do usuario e chama adicionarAoCarrinho
+    public void promptAdicionarAoCarrinho(Usuario user) {
+        Scanner scanner = new Scanner(System.in);
+        //verificamos a existencia do produto
 
         printarEstoque();
 
@@ -269,19 +405,68 @@ public class DB {
         } else {
 
             Produto p1 = this.produtoList.get(i);
-            if (produtoList.get(i).tipo.equalsIgnoreCase("livro")) {
-                System.out.println("Você deseja alugar ou comprar?");
-                Scanner scanner1 = new Scanner(System.in);
-                String tipo = scanner1.nextLine();
-                if (tipo.equalsIgnoreCase("alugar")) 
-                {
-                  this.userList.get(u).fidelidade++;
-                }
-            }
             System.out.println("Digite a quantidade que deseja adicionar: ");
             Scanner scanner2 = new Scanner(System.in);
             int quantidade = scanner2.nextInt();
-            adicionarAoCarrinho(userList.get(u), p1, quantidade);//chama a função no usuário solicitad
+            adicionarAoCarrinho(user, p1, quantidade);//chama a função no usuário solicitad
+
+        }
+
+        Utils.awaitInput();
+    }
+
+    //@Reinaldo
+    public void promptRemoverDoCarrinho(Usuario user) {
+        Scanner scanner = new Scanner(System.in);
+        //verificamos a existencia do produto
+
+        printarCarrinho(user);
+
+        System.out.println("Digite o nome do produto: ");
+        String Nome = scanner.nextLine();
+        int i = getProdutoIndex(Nome);
+        if (i == -1) {
+            System.out.println("Produto não listado no estoque");
+        } else {
+            //aqui temos que fazer um teste extra, verificar se o produto está no carrinho do usuário
+            Produto p1 = this.produtoList.get(i);
+            if(user.carrinho.contains(p1))
+            {
+                System.out.println("Digite a quantidade que deseja remover: ");
+                Scanner scanner2 = new Scanner(System.in);
+                int quantidade = scanner2.nextInt();
+                
+                //verifica se a quantidade a ser removida é maior que a quantidade do produto no carrinho
+                if(p1.quantidade <= quantidade){
+                    user.carrinho.remove(p1);
+                    p1.quantidade += quantidade;
+                    System.out.println(p1.nome+" removido do carrinho");
+                }
+                else
+                {
+                    for(int c=0; c<user.carrinho.size(); c++)
+                    {
+                        if(user.carrinho.get(c).nome.equalsIgnoreCase(Nome))
+                        {
+                            //System.out.println("achei!!!!!!!!!!!!!\n");
+                            int q = user.carrinho.get(c).quantidade;
+                            Produto novo = user.carrinho.get(c);
+                            novo.setQuantidade(q - quantidade);
+                            user.carrinho.set(c, novo);
+                        }
+                    }
+                    
+
+                    p1.quantidade += quantidade;
+                    System.out.println(quantidade+" "+p1.nome+" removido do carrinho");
+                }
+                
+
+            }
+            else
+            {
+                System.out.println("O produto não está no carrinho");
+            }
 
         }
 

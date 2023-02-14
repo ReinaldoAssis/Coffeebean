@@ -11,10 +11,12 @@ public class Usuario {
     public int fidelidade;
 
     public List<Produto> carrinho;
+    public List<Produto> alugados;
 
     public Usuario() {
         this.setStatus(false);
         carrinho = new ArrayList<Produto>();
+        alugados = new ArrayList<Produto>();
         this.setFidelidade(0);
     }
 
