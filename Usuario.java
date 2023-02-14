@@ -28,6 +28,8 @@ public class Usuario {
         System.out.println("Status da conta: " + this.isStatus());
         System.out.println("-----------------");
 
+        Utils.awaitInput();
+
     }
 
 
@@ -50,6 +52,8 @@ public class Usuario {
 
         setFidelidade();
         setStatus(true);
+
+        Utils.awaitInput();
     }
 
     public void modificarDados(){
@@ -63,20 +67,23 @@ public class Usuario {
 
         if(Dado.equalsIgnoreCase("CPF")){
             setCpf(novodado);
-            System.out.println(novodado);
+            //System.out.println(novodado);
         } else if (Dado.equalsIgnoreCase("Nome")) {
             setNome(novodado);
-            System.out.println(novodado);
+            //System.out.println(novodado);
         } else if (Dado.equalsIgnoreCase("Email")) {
             setEmail(novodado);
-            System.out.println(novodado);
+            //System.out.println(novodado);
         }else if (Dado.equalsIgnoreCase("Numero")){
             setNumero(novodado);
-            System.out.println(novodado);
+            //System.out.println(novodado);
         }else {
             System.out.println("Tente novamente. Opções de dados: CPF, Nome, Email, Numero.");
         }
+
+        Utils.awaitInput();
     }
+
     public String getNome() {
         return nome;
     }

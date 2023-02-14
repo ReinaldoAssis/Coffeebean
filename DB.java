@@ -42,9 +42,7 @@ public class DB {
         Usuario User1 = new Usuario();
 
         User1.criarConta();
-        //User1.estadoAtual();
-        //User1.modificarDados();
-        //User1.estadoAtual();
+        Utils.clearScreen();
 
         userList.add(User1);
 
@@ -70,6 +68,7 @@ public class DB {
         if(i == -1) System.out.println("Usuario não existe");
 
         userList.get(i).modificarDados();
+        Utils.clearScreen();
         userList.get(i).estadoAtual();
         
     }
@@ -83,6 +82,8 @@ public class DB {
         int i = getUserIndex(cpf);
         if(i == -1) System.out.println("Usuario não existe");
         System.out.println("Pontos de fidelidade:" + this.userList.get(i).fidelidade);
+
+        Utils.awaitInput();
     }
 
     public void removerUsuario(String cpf)
@@ -113,6 +114,8 @@ public class DB {
 
         }
 
+        Utils.awaitInput();
+
     }
 
     public void cadastrarProduto()
@@ -142,6 +145,8 @@ public class DB {
         produtoList.add(pd);
 
         System.out.println(Nome+" cadastrado com sucesso :P");
+
+        Utils.awaitInput();
 
     }
 
@@ -178,6 +183,8 @@ public class DB {
                     return;
                 }
         }
+
+        Utils.awaitInput();
     }
 
     //@Adonys
@@ -202,6 +209,8 @@ public class DB {
                 System.out.println("O produto " +Nome+ " não está disponível no estoque :(");
             }
         }
+
+        Utils.awaitInput();
     }
 
     //@Reinaldo
@@ -275,5 +284,7 @@ public class DB {
             adicionarAoCarrinho(userList.get(u), p1, quantidade);//chama a função no usuário solicitad
 
         }
+
+        Utils.awaitInput();
     }
 }
