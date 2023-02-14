@@ -229,24 +229,16 @@ public class DB {
                 System.out.println("Você deseja alugar ou comprar?");
                 Scanner scanner1 = new Scanner(System.in);
                 String tipo = scanner1.nextLine();
-                switch (tipo) {
-                    case "alugar":
-                        this.userList.get(u).fidelidade++;
-                        System.out.println("Digite a quantidade que deseja adicionar: ");
-                        Scanner scanner2 = new Scanner(System.in);
-                        int quantidade = scanner2.nextInt();
-                        adicionarAoCarrinho(userList.get(u), p1, quantidade);//chama a função no usuário solicitado
-                        break;
-                    case "comprar":
-                        System.out.println("Digite a quantidade que deseja adicionar: ");
-                        Scanner scanner3 = new Scanner(System.in);
-                        int Quantidade = scanner3.nextInt();
-                        adicionarAoCarrinho(userList.get(u), p1, Quantidade);//chama a função no usuário solicitado
-                        break;
-                    default:
-                        break;
+                if (tipo.equalsIgnoreCase("alugar")) 
+                {
+                  this.userList.get(u).fidelidade++;
                 }
             }
+            System.out.println("Digite a quantidade que deseja adicionar: ");
+            Scanner scanner2 = new Scanner(System.in);
+            int quantidade = scanner2.nextInt();
+            adicionarAoCarrinho(userList.get(u), p1, quantidade);//chama a função no usuário solicitad
+
         }
     }
 }
