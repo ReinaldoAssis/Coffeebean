@@ -5,12 +5,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Utils util = new Utils();
-
 
         DB db = new DB();
         while(true)
         {
+            Utils.clearScreen();
 
             System.out.println("----------------");
             System.out.println("1. Criar usuario");
@@ -51,7 +50,7 @@ public class Main {
             
                 case "5":
                     Utils.clearScreen();
-                    System.out.println(":P");
+                    db.removerProduto();
                 break;
 
                 case "6":

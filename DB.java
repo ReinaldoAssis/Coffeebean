@@ -145,6 +145,41 @@ public class DB {
 
     }
 
+    //@Reinaldo
+    public void removerProduto()
+    {
+        //temos que considerar um caso especial: pode existir um carrinho com o produto que será removido
+        //neste caso, solicita-se a confirmação
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-----------------");
+        System.out.println("Digite o nome do produto: ");
+        String nome = scanner.nextLine();
+
+        int i = getProdutoIndex(nome);
+        if(i == -1) System.out.println("O Produto não existe");
+        else {
+
+            //verificar se o produto está em algum carrinho
+            for(int j=0; j<userList.size(); j++)
+                if(userList.get(j).carrinho.contains(produtoList.get(i)))
+                {
+                    System.out.println("O produto está em um carrinho, deseja remover mesmo assim? [sim/nao]");
+                    String opcao = scanner.nextLine();
+                    if(opcao.equals("sim"))
+                    {
+                        System.out.println("O produto "+ produtoList.get(i).nome+ " foi removido" );
+                        produtoList.remove(i);
+                    }
+                    else
+                    {
+                        System.out.println("O produto "+ produtoList.get(i).nome+ " não foi removido e está contido em ao menos um carrinho (usuario:" + userList.get(j).nome+ " )" );
+                    }
+                    return;
+                }
+        }
+    }
+
     //@Adonys
     public void verificarEstoque()
     {
