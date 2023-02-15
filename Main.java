@@ -33,8 +33,6 @@ public class Main {
 
         while(true)
         {
-            Utils.clearScreen();
-
             System.out.println("----------------");
             System.out.println("1. Criar usuario");
             System.out.println("2. Deletar usuario");
@@ -55,57 +53,57 @@ public class Main {
             switch(opcao)
             {
                 case "1":
-                    Utils.clearScreen();
+
                     db.criarUsuario();    
                 break;
 
                 case "2":
-                    Utils.clearScreen();
+
                     db.removerUsuario();
                 break;
 
                 case "3":
-                    Utils.clearScreen();
+
                     db.modificarUsuario();
                 break;
 
                 case "4":
-                    Utils.clearScreen();
+
                     db.cadastrarProduto();
                 break;
             
                 case "5":
-                    Utils.clearScreen();
+
                     db.removerProduto();
                 break;
 
                 case "6":
-                    Utils.clearScreen();
+
                     db.verificarEstoque();
                 break;
 
                 case "7":
-                    Utils.clearScreen();
+
                     db.menuCarrinho();
                 break;
 
                 case "8":
-                    Utils.clearScreen();
+
                     db.promptAlugarLivro();
                  break;  
                  
                  case "9":
-                    Utils.clearScreen();
+
                     db.fluxoDeCaixa();
                  break;
 
                  case "10":
-                    Utils.clearScreen();
+
                     db.ConsultaFidelidade();
                  break;
                     
                 case "11":
-                    Utils.clearScreen();
+
                     System.exit(0);
                 break;
             }

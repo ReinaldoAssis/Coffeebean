@@ -30,7 +30,6 @@ public class Usuario {
         System.out.println("Status da conta: " + this.isStatus());
         System.out.println("-----------------");
 
-        Utils.awaitInput();
 
     }
 
@@ -55,7 +54,6 @@ public class Usuario {
         setFidelidade();
         setStatus(true);
 
-        Utils.awaitInput();
     }
 
     public void modificarDados(){
@@ -83,7 +81,6 @@ public class Usuario {
             System.out.println("Tente novamente. Opções de dados: CPF, Nome, Email, Numero.");
         }
 
-        Utils.awaitInput();
     }
 
     public String getNome() {
