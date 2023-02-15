@@ -247,6 +247,10 @@ public class DB {
                 novo.quantidade = quantidade;
                 novo.nome = produto.nome;
                 novo.codigo = produto.codigo;
+                novo.tipo = produto.tipo;
+                novo.valorDeCompra = produto.valorDeCompra;
+                novo.valorDeVenda = produto.valorDeVenda;
+
                 user.carrinho.add(novo);
             }else{
                 Produto p2 = user.carrinho.get(j);
