@@ -1,7 +1,6 @@
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Dictionary;
 
 
 public class DB {
@@ -82,7 +81,12 @@ public class DB {
         String cpf = leitor.nextLine();
 
         int i = getUserIndex(cpf);
-        if(i == -1) System.out.println("Usuario não existe");
+        if(i == -1)
+        {
+            System.out.println("Usuario não existe");
+            Utils.awaitInput();
+            return;
+        }
 
         userList.get(i).modificarDados();
         Utils.clearScreen();
@@ -97,7 +101,12 @@ public class DB {
         String cpf = leitor.nextLine();
 
         int i = getUserIndex(cpf);
-        if(i == -1) System.out.println("Usuario não existe");
+        if(i == -1)
+        {
+            System.out.println("Usuario não existe");
+            Utils.awaitInput();
+            return;
+        }
         System.out.println("Pontos de fidelidade:" + this.userList.get(i).fidelidade);
 
         Utils.awaitInput();
@@ -117,19 +126,19 @@ public class DB {
         Scanner leitor = new Scanner(System.in);
         String cpf = leitor.nextLine();
         int i = getUserIndex(cpf);
-
-        System.out.println("Deseja remover usuario " + userList.get(i).nome + "? [sim/nao]");
-        String opcao = leitor.nextLine();
-        if(opcao.equals("sim"))
+        if(i == -1) System.out.println("Usuario não existe");
+        else 
         {
-            if(i == -1) System.out.println("Usuario não existe");
-            else 
+            System.out.println("Deseja remover usuario " + userList.get(i).nome + "? [sim/nao]");
+            String opcao = leitor.nextLine();
+            if(opcao.equals("sim"))
             {
                 userList.remove(i);
                 System.out.println("Usuario removido :'(");
+    
             }
-
         }
+
 
         Utils.awaitInput();
 
@@ -295,6 +304,7 @@ public class DB {
         
         if (u == -1) {
             System.out.println("Usuario não cadastrado");
+            Utils.awaitInput();
             return;
         }
         

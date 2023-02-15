@@ -23,8 +23,7 @@ public class Main {
         livro.tipo = "livro";
         livro.quantidade = 10;
         livro.valorDeCompra = 10;
-        livro.valorDeVenda = 20;
-
+        livro.valorDeVenda = 300;
         db.compra += 100;
 
         db.userList.add(rei);
@@ -45,7 +44,7 @@ public class Main {
             System.out.println("7. Carrinho");
             System.out.println("8. Aluguel de livro");
             System.out.println("9. Fluxo de caixa");
-            System.out.println("10. Consultar os pontos de fidelidade");
+            System.out.println("10. Consultar pontos de fidelidade");
             System.out.println("11. Sair");
             System.out.println("----------------");
             
