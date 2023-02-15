@@ -30,6 +30,18 @@ public class DB {
         return -1;
     }
 
+    public int getProdutoIndexUser(String nome, Usuario user)
+    {
+        for(int i=0; i<user.carrinho.size(); i++)
+        {
+            if(user.carrinho.get(i).nome.equalsIgnoreCase(nome))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public int getUserIndex(String cpf)
     {
         for(int i=0; i<userList.size(); i++)
@@ -228,10 +240,18 @@ public class DB {
         {
             produto.quantidade -= quantidade;
 
-            Produto novo = produto;
-            novo.quantidade = quantidade;
-
-            user.carrinho.add(produto);
+            int j = getProdutoIndexUser(produto.nome, user);
+            if (j == -1)
+            {
+                Produto novo = new Produto();
+                novo.quantidade = quantidade;
+                novo.nome = produto.nome;
+                novo.codigo = produto.codigo;
+                user.carrinho.add(novo);
+            }else{
+                Produto p2 = user.carrinho.get(j);
+                p2.quantidade += quantidade;
+            }
             System.out.println(produto.nome+" adicionado ao carrinho");
         }
         else
@@ -389,7 +409,7 @@ public class DB {
         Utils.awaitInput();
     }
 
-    //@Reinaldo
+    //@Reinaldo & @Adonys
     //solicita input do usuario e chama adicionarAoCarrinho
     public void promptAdicionarAoCarrinho(Usuario user) {
         Scanner scanner = new Scanner(System.in);
@@ -415,7 +435,7 @@ public class DB {
         Utils.awaitInput();
     }
 
-    //@Reinaldo
+    //@Reinaldo & @Adonys
     public void promptRemoverDoCarrinho(Usuario user) {
         Scanner scanner = new Scanner(System.in);
         //verificamos a existencia do produto
@@ -425,48 +445,33 @@ public class DB {
         System.out.println("Digite o nome do produto: ");
         String Nome = scanner.nextLine();
         int i = getProdutoIndex(Nome);
-        if (i == -1) {
-            System.out.println("Produto não listado no estoque");
+        int j = getProdutoIndexUser(Nome, user);
+
+        if (j == -1) {
+            System.out.println("Produto não listado no carrinho do usuário");
         } else {
             //aqui temos que fazer um teste extra, verificar se o produto está no carrinho do usuário
             Produto p1 = this.produtoList.get(i);
-            if(user.carrinho.contains(p1))
-            {
+            Produto p2 = user.carrinho.get(j);
+
                 System.out.println("Digite a quantidade que deseja remover: ");
                 Scanner scanner2 = new Scanner(System.in);
                 int quantidade = scanner2.nextInt();
-                
                 //verifica se a quantidade a ser removida é maior que a quantidade do produto no carrinho
-                if(p1.quantidade <= quantidade){
-                    user.carrinho.remove(p1);
-                    p1.quantidade += quantidade;
+                if(p2.quantidade <= quantidade){
+                    int quantidadeTemp = p2.quantidade;
+                    user.carrinho.remove(p2);
+                    p1.quantidade += quantidadeTemp;
                     System.out.println(p1.nome+" removido do carrinho");
                 }
                 else
                 {
-                    for(int c=0; c<user.carrinho.size(); c++)
-                    {
-                        if(user.carrinho.get(c).nome.equalsIgnoreCase(Nome))
-                        {
-                            //System.out.println("achei!!!!!!!!!!!!!\n");
-                            int q = user.carrinho.get(c).quantidade;
-                            Produto novo = user.carrinho.get(c);
-                            novo.setQuantidade(q - quantidade);
-                            user.carrinho.set(c, novo);
-                        }
-                    }
-                    
-
+                    int q = p2.quantidade;
+                    p2.setQuantidade(q - quantidade);
                     p1.quantidade += quantidade;
                     System.out.println(quantidade+" "+p1.nome+" removido do carrinho");
                 }
-                
 
-            }
-            else
-            {
-                System.out.println("O produto não está no carrinho");
-            }
 
         }
 
