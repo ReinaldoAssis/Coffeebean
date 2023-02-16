@@ -383,12 +383,12 @@ public class DB {
             if(p.tipo.equalsIgnoreCase("livro"))
             {
                 user.alugados.add(p);
+                user.fidelidade += 1;
             }
             System.out.println("Livro alugado por "+ user.nome+", valor: "+ p.valorDeVenda*0.3);
             venda += p.valorDeVenda*0.3;
         }
 
-        user.fidelidade += 1;
         
         Utils.awaitInput();
     }
